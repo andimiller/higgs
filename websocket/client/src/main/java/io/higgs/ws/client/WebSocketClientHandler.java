@@ -21,7 +21,8 @@ import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.GenericFutureListener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -121,7 +122,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
                 l.onPing(c, (PingWebSocketFrame) frame.copy());
             }
         } else if (frame instanceof PongWebSocketFrame) {
-            Logger.getLogger(getClass()).warn(
+            LoggerFactory.getLogger(getClass()).warn(
                     String.format("WebSocketClient received a PongWebSocketFrame, that shouldn't happen! Data : %s",
                             frame.content().toString(CharsetUtil.UTF_8)));
         } else if (frame instanceof CloseWebSocketFrame) {
